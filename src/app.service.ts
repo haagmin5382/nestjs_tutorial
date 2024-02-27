@@ -3,6 +3,8 @@ import { Injectable } from '@nestjs/common';
 @Injectable()
 export class AppService {
   getHello(): string {
-    return 'Hello World!';
+    // business logic
+
+    return 'Hello World!'; // res.send() 없이 return으로 가능
   }
 }
