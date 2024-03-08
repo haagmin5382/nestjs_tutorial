@@ -13,7 +13,6 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse<Response>();
     const request = ctx.getRequest<Request>();
     const status = exception.getStatus();
-    const error = exception.getResponse(); // controller에서 설정한 에러메세지
 
     // error 메세지 커스텀
     const customedError = exception.getResponse() as
@@ -37,14 +36,5 @@ export class HttpExceptionFilter implements ExceptionFilter {
         path: request.url,
       });
     }
-
-    // express : res.status(400).json({...})
-    response.status(status).json({
-      success: false,
-      error: error,
-      statusCode: status,
-      timestamp: new Date().toISOString(),
-      path: request.url,
-    });
   }
 }
