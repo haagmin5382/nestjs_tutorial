@@ -14,6 +14,6 @@ export class AppController {
 
   @Get()
   getHello(): string {
-    return this.catsService.hiCatSeviceProduct();
+    return 'home';
   }
 }
