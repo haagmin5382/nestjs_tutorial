@@ -5,6 +5,7 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.useGlobalFilters(new HttpExceptionFilter()); // global filter 사용
-  await app.listen(8000);
+  const PORT = process.env.PORT;
+  await app.listen(PORT);
 }
 bootstrap();
