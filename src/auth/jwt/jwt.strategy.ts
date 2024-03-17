@@ -9,7 +9,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly catsRepository: CatsRepository) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(), // Header의 token에서 추출
-      secretOrKey: 'secret', // key, 유출되면 안됨, AuthModule의 JwtModule.register의 secret와 맞춰줘야한다.
+      secretOrKey: process.env.JWT_SECRET, // key, 유출되면 안됨, AuthModule의 JwtModule.register의 secret와 맞춰줘야한다.
       igonoreExpiration: false, // 만료되는 기간
     }); // jwt에 대한 설정
   }
