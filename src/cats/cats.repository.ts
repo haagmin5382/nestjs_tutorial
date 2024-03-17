@@ -24,4 +24,9 @@ export class CatsRepository {
     const cat = await this.catModel.findOne({ email });
     return cat;
   }
+
+  async findCatByIdWithoutPassword(catId: string) {
+    const cat = await this.catModel.findById(catId).select('-password'); // select로 password를 제외(-,마이너스)하고 가져온다. 보안상 이유로 가져오지 않는다.
+    return cat;
+  }
 }

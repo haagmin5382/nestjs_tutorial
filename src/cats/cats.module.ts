@@ -4,7 +4,6 @@ import { CatsController } from './cats.controller';
 import { Cat, CatSchema } from './cats.schema';
 import { CatsService } from './cats.service';
 import { CatsRepository } from './cats.repository';
-import { AuthService } from 'src/auth/auth.service';
 import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
