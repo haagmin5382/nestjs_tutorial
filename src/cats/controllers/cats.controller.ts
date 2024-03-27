@@ -79,7 +79,7 @@ export class CatsController {
   @ApiOperation({ summary: '고양이 이미지 업로드' })
   @UseGuards(JwtAuthGuard)
   @Post('upload')
-  @UseInterceptors(FilesInterceptor('image')) // frontend key값,folder, max count
+  @UseInterceptors(FilesInterceptor('image', 10, multerOptions('cats'))) // frontend key값,folder, max count
   uploadFile(
     @UploadedFiles() files: Array<Express.Multer.File>,
     @CurrentUser() cat: Cat,
