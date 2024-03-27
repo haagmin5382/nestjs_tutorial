@@ -10,7 +10,7 @@ const createFolder = (folder: string) => {
   try {
     console.log('💾 Create a root uploads folder...');
 
-    fs.mkdirSync(path.join(__dirname, '..', `uploads`));
+    fs.mkdirSync(path.join(__dirname, '..', `uploads`)); // mkdirSync => 폴더를 만드는 명령어
   } catch (error) {
     console.log('The folder already exists...');
   }

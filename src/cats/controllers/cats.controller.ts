@@ -17,7 +17,7 @@ import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
 import { CurrentUser } from 'src/common/decorators/user.decorator';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'src/common/utils/multer.options';
 import { Cat } from '../cats.schema';
 
@@ -77,14 +77,14 @@ export class CatsController {
   // } => 필요없음, 프론트 입장에서 jwt를 제거하면 그게 로그아웃이다.
 
   @ApiOperation({ summary: '고양이 이미지 업로드' })
-  @UseInterceptors(FileInterceptor('image', multerOptions('cats'))) // frontend key값,folder, max count
   @UseGuards(JwtAuthGuard)
   @Post('upload')
+  @UseInterceptors(FilesInterceptor('image')) // frontend key값,folder, max count
   uploadFile(
     @UploadedFiles() files: Array<Express.Multer.File>,
     @CurrentUser() cat: Cat,
   ) {
-    console.log(files);
+    console.log('files', files);
     return this.catsService.uploadImg(cat, files);
   }
 

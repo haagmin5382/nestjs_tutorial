@@ -35,7 +35,6 @@ export class CatsService {
   }
   async uploadImg(cat: Cat, files: Express.Multer.File[]) {
     const fileName = `cats/${files[0].filename}`;
-
     const newCat = await this.catsRepository.findByIdAndUpdateImg(
       cat.id,
       fileName,
