@@ -20,6 +20,9 @@ export class CatsRepository {
     return await this.catModel.create(cat);
   }
 
+  async findAll() {
+    return await this.catModel.find();
+  }
   async findCatByEmail(email: string) {
     const cat = await this.catModel.findOne({ email });
     return cat;
@@ -28,5 +31,11 @@ export class CatsRepository {
   async findCatByIdWithoutPassword(catId: string) {
     const cat = await this.catModel.findById(catId).select('-password'); // select로 password를 제외(-,마이너스)하고 가져온다. 보안상 이유로 가져오지 않는다.
     return cat;
+  }
+  async findByIdAndUpdateImg(id: string, fileName: string) {
+    const cat = await this.catModel.findById(id);
+    cat.imgUrl = `http://localhost:8000/media/${fileName}`;
+    const newCat = await cat.save();
+    return newCat.readOnlyData;
   }
 }
